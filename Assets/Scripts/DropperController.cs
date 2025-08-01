@@ -8,8 +8,11 @@ public class DropperController : MonoBehaviour
     public float rightLimit = 2.6f;
     public float moveSpeed = 2f;
     
-    [Header("Input")]
+    [Header("Prerequisites")]
     public InputActionAsset inputActions;
+    
+    [SerializeField] private float fruitPosOffset = 0.1f;
+    [SerializeField] private GameObject currentFruit;
     
     private InputActionMap _inputMap;
     private InputAction _moveAction;
@@ -45,6 +48,13 @@ public class DropperController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameObject newFruit = FruitManager.Instance.fruits[FruitManager.Instance.GetNextFruitIndex()];
+        
+        currentFruit = Instantiate(newFruit, GetFruitAnchorPosition(newFruit), transform.rotation);
+    }
+
     private void FixedUpdate()
     {
         float moveAmount = _horizontalInput * moveSpeed * Time.fixedDeltaTime;
@@ -61,6 +71,30 @@ public class DropperController : MonoBehaviour
     private void DropFruit()
     {
         Debug.Log("Dropping fruit at position: " + transform.position.x);
+    }
+
+    private Vector3 GetFruitAnchorPosition(GameObject fruit)
+    {
+        Collider2D fruitCollider = fruit.GetComponent<Collider2D>();
+        Collider2D dropperCollider = GetComponent<Collider2D>();
+        
+        if (fruitCollider != null && dropperCollider != null)
+        {
+            // Get the bounds
+            Bounds fruitBounds = fruitCollider.bounds;
+            Bounds dropperBounds = dropperCollider.bounds;
+            
+            // Position fruit so its top edge is just below the dropper's bottom edge
+            float targetY = dropperBounds.min.y - fruitPosOffset - (fruitBounds.size.y * 0.5f);
+            
+            return new Vector3(
+                transform.position.x, 
+                targetY, 
+                fruit.transform.position.z
+            );
+        }
+
+        return new Vector3(0, 0, 0);
     }
     
     private void OnDrawGizmosSelected()

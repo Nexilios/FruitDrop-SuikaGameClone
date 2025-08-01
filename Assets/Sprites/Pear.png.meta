@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 15b7f25306891ab4bb8e4f55163e32d9
+guid: e3c41070d5403994aaede1fc707f284e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4467018334214269223
-    second: hang_8886757_0
+      213: -5670339388207800344
+    second: Pear_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hang_8886757_0
+      name: Pear_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 70
-        width: 512
-        height: 372
+        x: 23
+        y: 0
+        width: 209
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 729aff7f1890efd30800000000000000
-      internalID: 4467018334214269223
+      spriteID: 8efd7f18e58ee41b0800000000000000
+      internalID: -5670339388207800344
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hang_8886757_0: 4467018334214269223
+      Pear_0: -5670339388207800344
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

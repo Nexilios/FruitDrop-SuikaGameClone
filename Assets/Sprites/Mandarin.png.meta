@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fc048710a754cfb4ab591ad21c058355
+guid: f0198a91d6756974cbbc674c1ed6012d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5610694874586485922
-    second: white stripe 2_0
+      213: 6627404146127580454
+    second: Mandarin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,12 +72,12 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: white stripe 2_0
+      name: Mandarin_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 12
-        height: 8
+        x: 1
+        y: 7
+        width: 254
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5bea210dbec222b0800000000000000
-      internalID: -5610694874586485922
+      spriteID: 62da2e815f449fb50800000000000000
+      internalID: 6627404146127580454
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      white stripe 2_0: -5610694874586485922
+      Mandarin_0: 6627404146127580454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

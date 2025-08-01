@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 15b7f25306891ab4bb8e4f55163e32d9
+guid: 8f383dca96fe1284781f26ed12226ed6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4467018334214269223
-    second: hang_8886757_0
+      213: 7293598183456022363
+    second: Apple_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hang_8886757_0
+      name: Apple_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 70
-        width: 512
-        height: 372
+        x: 5
+        y: 0
+        width: 246
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 729aff7f1890efd30800000000000000
-      internalID: 4467018334214269223
+      spriteID: b5f945b97e0183560800000000000000
+      internalID: 7293598183456022363
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hang_8886757_0: 4467018334214269223
+      Apple_0: 7293598183456022363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
