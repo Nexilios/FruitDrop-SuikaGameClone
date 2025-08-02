@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda1b3a97c739c349aec3a41f72948e4, type: 3}
+  m_Name: MidGame
+  m_EditorClassIdentifier: 
+  fruits:
+  - fruitData: {fileID: 11400000, guid: 369b33d62aa3e0645a7c2fc2a676a045, type: 2}
+    weight: 50
+  - fruitData: {fileID: 11400000, guid: 3ea76e421b15d2f42912455a1fafb8ad, type: 2}
+    weight: 20
+  - fruitData: {fileID: 11400000, guid: a9472f11d755afc4ebf856257b6ae922, type: 2}
+    weight: 15
+  - fruitData: {fileID: 11400000, guid: 0314d8de2a661804b899a0aae592507b, type: 2}
+    weight: 10
+  - fruitData: {fileID: 11400000, guid: 7e3b03c929f09814fa94d9c69f807425, type: 2}
+    weight: 5
+  - fruitData: {fileID: 11400000, guid: 2379f504568c5af488a319852c5b242d, type: 2}
+    weight: 0
+  - fruitData: {fileID: 11400000, guid: 2a5f181d354c78549beb37bc8792cfe4, type: 2}
+    weight: 0
+  - fruitData: {fileID: 11400000, guid: e87bc9a16399aa84896b7e298ecb366b, type: 2}
+    weight: 0
+  - fruitData: {fileID: 11400000, guid: c8e66eef5e2d63f45ba5556487c824b9, type: 2}
+    weight: 0
+  - fruitData: {fileID: 11400000, guid: 20aa4f3fcb953ea43bd43229bee2a2c5, type: 2}
+    weight: 0

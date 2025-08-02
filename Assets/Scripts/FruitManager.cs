@@ -5,12 +5,12 @@ using Random = UnityEngine.Random;
 public class FruitManager : MonoBehaviour
 {
     public static FruitManager Instance;
-    public GameObject[] fruits;
 
-    public int maxFruitQueueSize = 3;
-    private Queue<int> _fruitQueue;
+    [SerializeField] private WeightedFruitsData[] weightedFruits;
     
-    private FruitData.FruitNames _fruitNames;
+    public int maxFruitQueueSize = 3;
+    
+    private Queue<int> _fruitQueue;
     
     private void Awake()
     {
@@ -26,13 +26,13 @@ public class FruitManager : MonoBehaviour
     {
         if (_fruitQueue.Count >= maxFruitQueueSize) return;
         
-        int newFruitIndex = Random.Range(0, fruits.Length);
+        int newFruitIndex = Random.Range(0, weightedFruits.Length);
         _fruitQueue.Enqueue(newFruitIndex);
     }
     
     private void InitializeFruitsQueue()
     {
-        if (fruits.Length <= 0) return;
+        if (weightedFruits.Length <= 0) return;
         
         _fruitQueue = new Queue<int>();
 
@@ -42,7 +42,7 @@ public class FruitManager : MonoBehaviour
         }
     }
 
-    public int GetNextFruitIndex()
+    private int GetNextFruitIndex()
     {
         int nextFruitIndex = _fruitQueue.Dequeue();
         
@@ -55,4 +55,9 @@ public class FruitManager : MonoBehaviour
     {
 	    Debug.Log("Merging "  + fruit1.name + " and " + fruit2.name);
     }
+
+    public void GetNextFruit()
+    {
+        Debug.Log("Getting next fruit.");
+    } 
 }

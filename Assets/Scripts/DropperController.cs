@@ -50,9 +50,10 @@ public class DropperController : MonoBehaviour
 
     private void Start()
     {
-        GameObject newFruit = FruitManager.Instance.fruits[FruitManager.Instance.GetNextFruitIndex()];
-        
-        currentFruit = Instantiate(newFruit, GetFruitAnchorPosition(newFruit), transform.rotation);
+        if (FruitManager.Instance != null)
+        {
+            FruitManager.Instance.GetNextFruit();
+        }
     }
 
     private void FixedUpdate()
