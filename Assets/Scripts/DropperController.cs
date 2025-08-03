@@ -52,7 +52,7 @@ public class DropperController : MonoBehaviour
     {
         if (FruitManager.Instance != null)
         {
-            FruitManager.Instance.GetNextFruit();
+            
         }
     }
 

@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FruitManager : MonoBehaviour
 {
     public static FruitManager Instance;
-
-    [SerializeField] private WeightedFruitsData[] weightedFruits;
-    
     public int maxFruitQueueSize = 3;
     
-    private Queue<int> _fruitQueue;
+    [SerializeField] private List<WeightedFruitsData> weightedFruits;
+    [SerializeField] private List<int> nextFruitList;
+    [SerializeField] private int currentGameStage = 0;
     
     private void Awake()
     {
@@ -19,45 +19,61 @@ public class FruitManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeFruitsQueue();
+        InitializeFruitList();
     }
-
-    private void AddNewFruitToQueue()
+    private int? GetRandomFruitIndex(WeightedFruitsData array)
     {
-        if (_fruitQueue.Count >= maxFruitQueueSize) return;
+        float totalWeight = array.fruits.Sum(fruit => fruit.weight);
         
-        int newFruitIndex = Random.Range(0, weightedFruits.Length);
-        _fruitQueue.Enqueue(newFruitIndex);
-    }
-    
-    private void InitializeFruitsQueue()
-    {
-        if (weightedFruits.Length <= 0) return;
+        float randomValue = Random.Range(0f, totalWeight);
+        float currentWeight = 0f;
         
-        _fruitQueue = new Queue<int>();
-
-        for (int i = 0; i < maxFruitQueueSize; i++)
+        for (int i = 0; i < array.fruits.Length; i++)
         {
-            AddNewFruitToQueue();
+            currentWeight += array.fruits[i].weight;
+            if (randomValue <= currentWeight)
+                return i;
+        }
+
+        return null;
+    }
+
+    private void InitializeFruitList()
+    {
+        if (weightedFruits.Count <= 0) return;
+        
+        nextFruitList.Clear();
+
+        while (nextFruitList.Count < maxFruitQueueSize)
+        {
+            int nextIndex = GetRandomFruitIndex(weightedFruits[0]) ?? -1;
+            
+            if (nextIndex >= 0)
+            {
+                nextFruitList.Add(nextIndex);
+            }
         }
     }
 
-    private int GetNextFruitIndex()
+    private void PopFruitQueue()
     {
-        int nextFruitIndex = _fruitQueue.Dequeue();
+        nextFruitList.RemoveAt(0);
         
-        AddNewFruitToQueue();
-        
-        return nextFruitIndex;
+        int nextIndex = GetRandomFruitIndex(weightedFruits[0]) ?? -1;
+            
+        if (nextIndex >= 0)
+        {
+            nextFruitList.Add(nextIndex);
+        }
     }
     
-    public void MergeFruit(GameObject fruit1, GameObject fruit2) 
+    public FruitData GetNextFruitData()
     {
-	    Debug.Log("Merging "  + fruit1.name + " and " + fruit2.name);
+        if (nextFruitList.Count <= 0 || weightedFruits.Count <= 0) return null;
+        
+        FruitData nextFruitData = weightedFruits[currentGameStage].fruits[nextFruitList.First()].fruitData;
+        PopFruitQueue();
+        
+        return nextFruitData;
     }
-
-    public void GetNextFruit()
-    {
-        Debug.Log("Getting next fruit.");
-    } 
 }

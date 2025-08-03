@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class FruitScript : MonoBehaviour
 {
-    public FruitData fruit_data;
+    private FruitData _fruitData;
     
     private void OnCollisionEnter2D(Collision2D other)
     {

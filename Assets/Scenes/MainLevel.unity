@@ -1195,10 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072d78e5374d6146bb6260a3c243205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightedFruits:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  weightedFruits: []
   maxFruitQueueSize: 3
 --- !u!4 &1193906262
 Transform:

@@ -11,6 +11,4 @@ public class WeightedFruit
 public class WeightedFruitsData : ScriptableObject
 {
     public WeightedFruit[] fruits;
-    
-    
 }
