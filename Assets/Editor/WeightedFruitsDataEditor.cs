@@ -39,13 +39,12 @@ namespace Editor
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 FruitData fruitData = AssetDatabase.LoadAssetAtPath<FruitData>(path);
-            
-                if (fruitData)
-                {
-                    // Use the asset name (without extension) as the key
-                    string fruitName = System.IO.Path.GetFileNameWithoutExtension(path);
-                    foundFruits[fruitName] = fruitData;
-                }
+
+                if (!fruitData) continue;
+                
+                // Use the asset name (without extension) as the key
+                string fruitName = System.IO.Path.GetFileNameWithoutExtension(path);
+                foundFruits[fruitName] = fruitData;
             }
         
             // Create ordered list based on fruitOrder array
@@ -53,29 +52,19 @@ namespace Editor
         
             foreach (string fruitName in _fruitOrder)
             {
-                if (foundFruits.ContainsKey(fruitName))
+                if (foundFruits.TryGetValue(fruitName, out var fruit))
                 {
                     orderedFruits.Add(new WeightedFruit
                     {
-                        fruitData = foundFruits[fruitName],
+                        fruitData = fruit,
                         weight = 1f
                     });
                 }
             }
         
             // Add any fruits that weren't in our predefined order (at the end)
-            foreach (var kvp in foundFruits)
-            {
-                if (!_fruitOrder.Contains(kvp.Key))
-                {
-                    orderedFruits.Add(new WeightedFruit
-                    {
-                        fruitData = kvp.Value,
-                        weight = 1f
-                    });
-                }
-            }
-        
+            orderedFruits.AddRange(from kvp in foundFruits where !_fruitOrder.Contains(kvp.Key) select new WeightedFruit { fruitData = kvp.Value, weight = 1f });
+
             weightedFruitsData.fruits = orderedFruits.ToArray();
         
             EditorUtility.SetDirty(weightedFruitsData);
