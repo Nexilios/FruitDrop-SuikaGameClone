@@ -3,15 +3,17 @@ using UnityEngine.InputSystem;
 
 public class DropperController : MonoBehaviour
 {
+    [Header("Prerequisites")]
+    public GameObject fruitPrefab;
+    public InputActionAsset inputActions;
+    
     [Header("Movement Settings")]
     public float leftLimit = -2.6f;
     public float rightLimit = 2.6f;
     public float moveSpeed = 2f;
     
-    [Header("Prerequisites")]
-    public InputActionAsset inputActions;
-    
-    [SerializeField] private float fruitPosOffset = 0.1f;
+    [Header("Fruit")]
+    public float fruitPosOffset = 0.1f;
     [SerializeField] private GameObject currentFruit;
     
     private InputActionMap _inputMap;
@@ -50,10 +52,23 @@ public class DropperController : MonoBehaviour
 
     private void Start()
     {
-        if (FruitManager.Instance != null)
+        if (FruitManager.Instance != null && fruitPrefab != null)
         {
-            
+            InstantiateFruit();
         }
+    }
+
+    private void InstantiateFruit()
+    {
+        FruitData newFruitData = FruitManager.Instance.GetNextFruitData();
+
+        GameObject newFruit = Instantiate(fruitPrefab);
+        newFruit.transform.position = GetFruitAnchorPosition(fruitPrefab);
+        newFruit.GetComponent<FruitScript>().SetFruitData(newFruitData);
+        
+        newFruit.SetActive(true);
+        
+        currentFruit = newFruit;
     }
 
     private void FixedUpdate()
@@ -91,7 +106,7 @@ public class DropperController : MonoBehaviour
             return new Vector3(
                 transform.position.x, 
                 targetY, 
-                fruit.transform.position.z
+                transform.position.z
             );
         }
 

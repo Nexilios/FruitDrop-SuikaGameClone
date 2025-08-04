@@ -76,4 +76,9 @@ public class FruitManager : MonoBehaviour
         
         return nextFruitData;
     }
+
+    public void MergeFruit(GameObject fruit1, GameObject fruit2)
+    {
+        
+    }
 }

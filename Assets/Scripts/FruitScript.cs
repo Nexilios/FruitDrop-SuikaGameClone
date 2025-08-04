@@ -1,35 +1,56 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer),typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class FruitScript : MonoBehaviour
 {
-    private FruitData _fruitData;
+    [SerializeField] private FruitData fruitData;
+    [SerializeField] private SpriteRenderer fruitRenderer;
+    [SerializeField] private Rigidbody2D fruitRigidBody2D;
+    [SerializeField] private CircleCollider2D fruitCollider;
     
-    private void OnCollisionEnter2D(Collision2D other)
+    public void SetFruitData(FruitData data)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Fruit"))
-        {
-            FruitScript otherFruit = other.gameObject.GetComponent<FruitScript>();
-
-            /*if (otherFruit != null && otherFruit.fruitName == fruitName &&
-                gameObject.GetInstanceID() < otherFruit.GetInstanceID())
-            {
-                MergeFruit(other.gameObject);
-            }*/
-        }
+        fruitData = data;
     }
 
-    /*private void MergeFruit(GameObject otherFruit)
+    private void ApplyFruitData()
     {
-        if (upgradeFruitPrefab == null) return;
+        if (fruitData == null) return;
         
-        // New position will be in between the 2 merging fruits
-        Vector3 mergePosition = (transform.position + otherFruit.transform.position) / 2f;
+        fruitRenderer.sprite = fruitData.sprite;
         
-        Instantiate(upgradeFruitPrefab, mergePosition, Quaternion.identity);
+        gameObject.transform.localScale = fruitData.scale;
         
-        // Destroy the merged fruit
-        Destroy(gameObject);
-        Destroy(otherFruit);
-    }*/
+        fruitCollider.offset = fruitData.colliderOffset;
+        fruitCollider.radius = fruitData.colliderRadius;
+        fruitCollider.sharedMaterial = fruitData.physicsMaterial;
+    }
+
+    private void Awake()
+    {
+        if (fruitRenderer == null) fruitRenderer = GetComponent<SpriteRenderer>();
+        if (fruitRigidBody2D == null) fruitRigidBody2D = GetComponent<Rigidbody2D>();
+        if (fruitCollider == null) fruitCollider = GetComponent<CircleCollider2D>();
+        
+        ApplyFruitData();
+    }
+    
+    private void Start()
+    {
+        fruitRigidBody2D.simulated = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Fruit")) return;
+        
+        var otherFruit = other.gameObject.GetComponent<FruitScript>();
+
+        if (otherFruit != null && otherFruit.fruitData.fruitName == fruitData.fruitName &&
+            gameObject.GetInstanceID() < otherFruit.GetInstanceID())
+        {
+            FruitManager.Instance.MergeFruit(gameObject, other.gameObject);
+        }
+    }
 }

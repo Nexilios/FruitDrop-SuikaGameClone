@@ -1195,8 +1195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072d78e5374d6146bb6260a3c243205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightedFruits: []
   maxFruitQueueSize: 3
+  weightedFruits:
+  - {fileID: 11400000, guid: 97d1d0b5290ed7143a704ab2aa5c6741, type: 2}
+  - {fileID: 11400000, guid: 7c83a39a0ba2f394da841a1fcb9a964d, type: 2}
+  - {fileID: 11400000, guid: 768e7f6b97f8a4e409383858d3583beb, type: 2}
+  nextFruitList: 
+  currentGameStage: 0
 --- !u!4 &1193906262
 Transform:
   m_ObjectHideFlags: 0
@@ -1313,10 +1318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6917a39c1a12044cb4d0b804533770d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitPrefab: {fileID: 1590181746159300296, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   leftLimit: -2.6
   rightLimit: 2.6
   moveSpeed: 2
-  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   fruitPosOffset: 0.1
   currentFruit: {fileID: 0}
 --- !u!1 &1260037774
