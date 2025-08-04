@@ -62,7 +62,7 @@ public class DropperController : MonoBehaviour
     {
         FruitData newFruitData = FruitManager.Instance.GetNextFruitData();
 
-        GameObject newFruit = Instantiate(fruitPrefab);
+        GameObject newFruit = Instantiate(fruitPrefab, transform);
         newFruit.transform.position = GetFruitAnchorPosition(fruitPrefab);
         newFruit.GetComponent<FruitScript>().SetFruitData(newFruitData);
         

@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class FruitScript : MonoBehaviour
 {
+    [Header("Debugging")]
     [SerializeField] private FruitData fruitData;
     [SerializeField] private SpriteRenderer fruitRenderer;
     [SerializeField] private Rigidbody2D fruitRigidBody2D;
@@ -24,7 +26,8 @@ public class FruitScript : MonoBehaviour
         
         fruitCollider.offset = fruitData.colliderOffset;
         fruitCollider.radius = fruitData.colliderRadius;
-        fruitCollider.sharedMaterial = fruitData.physicsMaterial;
+
+        fruitRigidBody2D.sharedMaterial = fruitData.physicsMaterial;
     }
 
     private void Awake()
@@ -34,11 +37,6 @@ public class FruitScript : MonoBehaviour
         if (fruitCollider == null) fruitCollider = GetComponent<CircleCollider2D>();
         
         ApplyFruitData();
-    }
-    
-    private void Start()
-    {
-        fruitRigidBody2D.simulated = true;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

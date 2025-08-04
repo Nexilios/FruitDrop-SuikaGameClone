@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e583b6cce2c6d3e4598b5b0c5f3810cb, type: 3}
   m_Name: Watermelon
   m_EditorClassIdentifier: 
-  scale: {x: 1, y: 1, z: 1}
+  scale: {x: 4, y: 4, z: 4}
   sprite: {fileID: 21300000, guid: 2131a5cb1e6c1054787650bbe501aa3a, type: 3}
   mergeScoreReward: 500
   fruitName: 9

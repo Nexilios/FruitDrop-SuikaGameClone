@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e583b6cce2c6d3e4598b5b0c5f3810cb, type: 3}
   m_Name: Strawberry
   m_EditorClassIdentifier: 
-  scale: {x: 0.3, y: 0.3, z: 0.3}
+  scale: {x: 1.2, y: 1.2, z: 1.2}
   sprite: {fileID: 21300000, guid: 548b52a4b8a41e74ba8cc48ab3240257, type: 3}
   mergeScoreReward: 100
   fruitName: 1
