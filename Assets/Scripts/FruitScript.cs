@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class FruitScript : MonoBehaviour
@@ -30,13 +28,35 @@ public class FruitScript : MonoBehaviour
         fruitRigidBody2D.sharedMaterial = fruitData.physicsMaterial;
     }
 
+    private void SetFruitAnchorPosition()
+    {
+        var dropper = transform.parent.gameObject;
+        SpriteRenderer dropperRenderer = dropper.GetComponent<SpriteRenderer>();
+
+        if (dropperRenderer == null || fruitCollider == null) return;
+        
+        Bounds dropperBounds = dropperRenderer.bounds;
+        
+        // Get fruit radius in world space
+        float fruitRadius = fruitCollider.radius * transform.lossyScale.y;
+        
+        // Position fruit center so the top of the circle touches dropper's bottom
+        float targetY = dropperBounds.min.y - fruitRadius - dropper.GetComponent<DropperController>().fruitPosOffset;
+        
+        transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+    }
+    
     private void Awake()
     {
         if (fruitRenderer == null) fruitRenderer = GetComponent<SpriteRenderer>();
         if (fruitRigidBody2D == null) fruitRigidBody2D = GetComponent<Rigidbody2D>();
         if (fruitCollider == null) fruitCollider = GetComponent<CircleCollider2D>();
-        
+    }
+
+    private void Start()
+    {
         ApplyFruitData();
+        SetFruitAnchorPosition();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
