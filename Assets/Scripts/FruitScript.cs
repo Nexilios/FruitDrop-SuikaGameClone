@@ -8,8 +8,7 @@ public class FruitScript : MonoBehaviour
     [SerializeField] private SpriteRenderer fruitRenderer;
     [SerializeField] private Rigidbody2D fruitRigidBody2D;
     [SerializeField] private CircleCollider2D fruitCollider;
-
-    public GameObject fruitFolder;
+    [SerializeField] private GameObject fruitFolder;
     
     public void SetFruitData(FruitData data)
     {
