@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Hide Mouse Pointer
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     // Update is called once per frame

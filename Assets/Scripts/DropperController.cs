@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 public class DropperController : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class DropperController : MonoBehaviour
     
     [Header("Fruit")]
     public float fruitPosOffset;
-    [SerializeField] private GameObject currentFruit;
+    [SerializeField] private FruitScript currentFruitComp;
     
     private InputActionMap _inputMap;
     private InputAction _moveAction;
@@ -46,7 +48,7 @@ public class DropperController : MonoBehaviour
         
         if (_interactAction.WasPressedThisFrame())
         {
-            DropFruit();
+            DropFruit().Forget();
         }
     }
 
@@ -63,9 +65,8 @@ public class DropperController : MonoBehaviour
         FruitData newFruitData = FruitManager.Instance.GetNextFruitData();
         
         GameObject newFruit = Instantiate(fruitPrefab, transform);
-        newFruit.GetComponent<FruitScript>().SetFruitData(newFruitData);
-        
-        currentFruit = newFruit;
+        currentFruitComp = newFruit.GetComponent<FruitScript>();
+        currentFruitComp.SetFruitData(newFruitData);
     }
 
     private void FixedUpdate()
@@ -81,9 +82,11 @@ public class DropperController : MonoBehaviour
         transform.position = new Vector3(newX, currentPos.y, currentPos.z);
     }
 
-    private void DropFruit()
+    private async UniTask DropFruit()
     {
-        Debug.Log("Dropping fruit at position: " + transform.position.x);
+        currentFruitComp.Drop();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        InstantiateFruit();
     }
     
     private void OnDrawGizmosSelected()

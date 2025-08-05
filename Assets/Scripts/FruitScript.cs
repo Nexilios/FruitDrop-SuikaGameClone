@@ -8,6 +8,8 @@ public class FruitScript : MonoBehaviour
     [SerializeField] private SpriteRenderer fruitRenderer;
     [SerializeField] private Rigidbody2D fruitRigidBody2D;
     [SerializeField] private CircleCollider2D fruitCollider;
+
+    public GameObject fruitFolder;
     
     public void SetFruitData(FruitData data)
     {
@@ -51,6 +53,7 @@ public class FruitScript : MonoBehaviour
         if (fruitRenderer == null) fruitRenderer = GetComponent<SpriteRenderer>();
         if (fruitRigidBody2D == null) fruitRigidBody2D = GetComponent<Rigidbody2D>();
         if (fruitCollider == null) fruitCollider = GetComponent<CircleCollider2D>();
+        if (fruitFolder == null) fruitFolder = GameObject.FindGameObjectWithTag("FruitFolder");
     }
 
     private void Start()
@@ -70,5 +73,11 @@ public class FruitScript : MonoBehaviour
         {
             FruitManager.Instance.MergeFruit(gameObject, other.gameObject);
         }
+    }
+
+    public void Drop()
+    {
+        gameObject.transform.SetParent(fruitFolder ? fruitFolder.transform : null);
+        fruitRigidBody2D.simulated = true;
     }
 }
