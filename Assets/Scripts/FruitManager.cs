@@ -7,14 +7,19 @@ public class FruitManager : MonoBehaviour
 {
     public static FruitManager instance;
     public int maxFruitQueueSize = 3;
+    public GameObject fruitPrefab;
+    public GameObject fruitFolder;
     
     [SerializeField] private List<WeightedFruitsData> weightedFruits;
-    [SerializeField] private List<int> nextFruitList;
     [SerializeField] private int currentGameStage;
+    
+    [Header("Debug")]
+    [SerializeField] private List<int> nextFruitList;
     
     private void Awake()
     {
         if (instance == null) instance = this;
+        if (fruitFolder == null) fruitFolder = GameObject.FindGameObjectWithTag("FruitFolder");
     }
 
     private void Start()
@@ -77,8 +82,23 @@ public class FruitManager : MonoBehaviour
         return nextFruitData;
     }
 
+    public GameObject InstantiateFruit(Transform parent, Vector3 pos = default)
+    {
+        FruitData newFruitData = GetNextFruitData();
+        
+        var newFruit = pos.Equals(Vector3.zero) ? Instantiate(fruitPrefab, parent) : Instantiate(fruitPrefab, pos, Quaternion.identity, parent);
+        
+        newFruit.GetComponent<FruitScript>().SetFruitData(newFruitData);
+
+        return newFruit;
+    }
+    
     public void MergeFruit(GameObject fruit1, GameObject fruit2)
     {
+        Vector3 newPoint = Vector3.Lerp(fruit1.transform.position, fruit2.transform.position, 0.6f);
+        InstantiateFruit(fruitFolder.transform, newPoint);
         
+        Destroy(fruit1, 0.01f);
+        Destroy(fruit2, 0.01f);
     }
 }

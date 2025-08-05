@@ -1,12 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
 
 public class DropperController : MonoBehaviour
 {
-    [Header("Prerequisites")]
-    public GameObject fruitPrefab;
+    [Header("Input Actions")]
     public InputActionAsset inputActions;
     
     [Header("Movement Settings")]
@@ -16,6 +14,8 @@ public class DropperController : MonoBehaviour
     
     [Header("Fruit")]
     public float fruitPosOffset;
+    
+    [Header("Debug")]
     [SerializeField] private FruitScript currentFruitComp;
     
     private InputActionMap _inputMap;
@@ -54,21 +54,36 @@ public class DropperController : MonoBehaviour
 
     private void Start()
     {
-        if (FruitManager.instance != null && fruitPrefab != null)
+        if (FruitManager.instance != null)
         {
-            InstantiateFruit();
+            SpawnNewFruit();
         }
     }
 
-    private void InstantiateFruit()
+    private void SpawnNewFruit()
     {
-        FruitData newFruitData = FruitManager.instance.GetNextFruitData();
-        
-        GameObject newFruit = Instantiate(fruitPrefab, transform);
+        GameObject newFruit = FruitManager.instance.InstantiateFruit(transform);
         currentFruitComp = newFruit.GetComponent<FruitScript>();
-        currentFruitComp.SetFruitData(newFruitData);
     }
+    
+    public void SetFruitAnchorPosition(GameObject fruit)
+    {
+        var dropperRenderer = gameObject.GetComponent<SpriteRenderer>();
+        var fruitCollider = fruit.GetComponent<CircleCollider2D>();
 
+        if (!dropperRenderer || !fruitCollider) return;
+        
+        var dropperBounds = dropperRenderer.bounds;
+        
+        // Get fruit radius in world space
+        float fruitRadius = fruitCollider.radius * transform.lossyScale.y;
+        
+        // Position fruit center so the top of the circle touches dropper's bottom
+        float targetY = dropperBounds.min.y - fruitRadius - fruitPosOffset;
+        
+        fruit.transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+    }
+    
     private void FixedUpdate()
     {
         float moveAmount = _horizontalInput * moveSpeed * Time.fixedDeltaTime;
@@ -84,9 +99,11 @@ public class DropperController : MonoBehaviour
 
     private async UniTask DropFruit()
     {
+        if (!currentFruitComp) return;
+        
         currentFruitComp.Drop();
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-        InstantiateFruit();
+        await UniTask.Delay(System.TimeSpan.FromSeconds(0.5f));
+        SpawnNewFruit();
     }
     
     private void OnDrawGizmosSelected()

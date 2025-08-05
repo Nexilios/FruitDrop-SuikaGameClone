@@ -8,7 +8,6 @@ public class FruitScript : MonoBehaviour
     [SerializeField] private SpriteRenderer fruitRenderer;
     [SerializeField] private Rigidbody2D fruitRigidBody2D;
     [SerializeField] private CircleCollider2D fruitCollider;
-    [SerializeField] private GameObject fruitFolder;
     
     public void SetFruitData(FruitData data)
     {
@@ -28,37 +27,24 @@ public class FruitScript : MonoBehaviour
 
         fruitRigidBody2D.sharedMaterial = fruitData.physicsMaterial;
     }
-
-    private void SetFruitAnchorPosition()
-    {
-        var dropper = transform.parent.gameObject;
-        SpriteRenderer dropperRenderer = dropper.GetComponent<SpriteRenderer>();
-
-        if (dropperRenderer == null || fruitCollider == null) return;
-        
-        Bounds dropperBounds = dropperRenderer.bounds;
-        
-        // Get fruit radius in world space
-        float fruitRadius = fruitCollider.radius * transform.lossyScale.y;
-        
-        // Position fruit center so the top of the circle touches dropper's bottom
-        float targetY = dropperBounds.min.y - fruitRadius - dropper.GetComponent<DropperController>().fruitPosOffset;
-        
-        transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
-    }
     
     private void Awake()
     {
         if (fruitRenderer == null) fruitRenderer = GetComponent<SpriteRenderer>();
         if (fruitRigidBody2D == null) fruitRigidBody2D = GetComponent<Rigidbody2D>();
         if (fruitCollider == null) fruitCollider = GetComponent<CircleCollider2D>();
-        if (fruitFolder == null) fruitFolder = GameObject.FindGameObjectWithTag("FruitFolder");
     }
 
     private void Start()
     {
         ApplyFruitData();
-        SetFruitAnchorPosition();
+        var dropper = transform.parent.GetComponent<DropperController>();
+        if (dropper)
+        {
+            dropper.SetFruitAnchorPosition(gameObject);
+            return;
+        }
+        fruitRigidBody2D.simulated = true;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -76,7 +62,7 @@ public class FruitScript : MonoBehaviour
 
     public void Drop()
     {
-        gameObject.transform.SetParent(fruitFolder ? fruitFolder.transform : null);
+        transform.SetParent(FruitManager.instance.fruitFolder ? FruitManager.instance.fruitFolder.transform : null);
         fruitRigidBody2D.simulated = true;
     }
 }
