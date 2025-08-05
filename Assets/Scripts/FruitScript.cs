@@ -70,7 +70,7 @@ public class FruitScript : MonoBehaviour
         if (otherFruit != null && otherFruit.fruitData.fruitName == fruitData.fruitName &&
             gameObject.GetInstanceID() < otherFruit.GetInstanceID())
         {
-            FruitManager.Instance.MergeFruit(gameObject, other.gameObject);
+            FruitManager.instance.MergeFruit(gameObject, other.gameObject);
         }
     }
 

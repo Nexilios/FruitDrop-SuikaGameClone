@@ -5,16 +5,16 @@ using Random = UnityEngine.Random;
 
 public class FruitManager : MonoBehaviour
 {
-    public static FruitManager Instance;
+    public static FruitManager instance;
     public int maxFruitQueueSize = 3;
     
     [SerializeField] private List<WeightedFruitsData> weightedFruits;
     [SerializeField] private List<int> nextFruitList;
-    [SerializeField] private int currentGameStage = 0;
+    [SerializeField] private int currentGameStage;
     
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (instance == null) instance = this;
     }
 
     private void Start()

@@ -54,7 +54,7 @@ public class DropperController : MonoBehaviour
 
     private void Start()
     {
-        if (FruitManager.Instance != null && fruitPrefab != null)
+        if (FruitManager.instance != null && fruitPrefab != null)
         {
             InstantiateFruit();
         }
@@ -62,7 +62,7 @@ public class DropperController : MonoBehaviour
 
     private void InstantiateFruit()
     {
-        FruitData newFruitData = FruitManager.Instance.GetNextFruitData();
+        FruitData newFruitData = FruitManager.instance.GetNextFruitData();
         
         GameObject newFruit = Instantiate(fruitPrefab, transform);
         currentFruitComp = newFruit.GetComponent<FruitScript>();
