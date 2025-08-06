@@ -483,19 +483,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.3947
+      value: -18.23
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1357,6 +1357,7 @@ MonoBehaviour:
   moveSpeed: 2
   fruitPosOffset: 0
   currentFruitComp: {fileID: 0}
+  dropperRenderer: {fileID: 1253326033}
 --- !u!1 &1260037774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1731,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.08, y: 0.92, z: 0}
-  m_LocalScale: {x: 0.25, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6967753705129850806}
@@ -2375,19 +2376,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.19999999
+      value: 0.8000001
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.19999999
+      value: 0.8000001
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.19999999
+      value: 0.8000001
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.198071
+      value: -21.19
       objectReference: {fileID: 0}
     - target: {fileID: 1124664779913171569, guid: 7aac6f1db2d59b8458994b471f363450, type: 3}
       propertyPath: m_LocalPosition.y
