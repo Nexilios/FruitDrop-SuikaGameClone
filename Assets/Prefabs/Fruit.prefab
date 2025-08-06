@@ -166,6 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitData: {fileID: 0}
-  fruitRenderer: {fileID: 0}
-  fruitRigidBody2D: {fileID: 0}
-  fruitCollider: {fileID: 0}
+  fruitRenderer: {fileID: 557376945298446769}
+  fruitRigidBody2D: {fileID: 4407940008397977179}
+  fruitCollider: {fileID: 3569710673739150176}

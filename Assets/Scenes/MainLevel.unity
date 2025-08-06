@@ -1352,8 +1352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  leftLimit: -2.6
-  rightLimit: 2.6
+  leftLimit: -2.7
+  rightLimit: 2.7
   moveSpeed: 2
   fruitPosOffset: 0
   currentFruitComp: {fileID: 0}

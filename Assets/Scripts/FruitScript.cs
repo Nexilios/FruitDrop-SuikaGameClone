@@ -14,6 +14,16 @@ public class FruitScript : MonoBehaviour
         fruitData = data;
     }
 
+    public FruitData GetFruitData()
+    {
+        return fruitData;
+    }
+
+    public SpriteRenderer GetFruitSpriteRenderer()
+    {
+        return fruitRenderer;
+    }
+    
     private void ApplyFruitData()
     {
         if (fruitData == null) return;
@@ -42,6 +52,7 @@ public class FruitScript : MonoBehaviour
         if (dropper)
         {
             dropper.SetFruitAnchorPosition(gameObject);
+            dropper.AdjustDropperOffset(fruitRenderer.bounds);
             return;
         }
         fruitRigidBody2D.simulated = true;
