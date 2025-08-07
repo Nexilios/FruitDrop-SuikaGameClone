@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: f0198a91d6756974cbbc674c1ed6012d, type: 3}
   mergeScoreReward: 150
   fruitName: 2
-  nextFruitTier: 3
+  nextFruitTierName: 3
   colliderOffset: {x: 0, y: 0}
   colliderRadius: 1.2
   physicsMaterial: {fileID: 6200000, guid: a9a898c27b4335b40b2461bb284e601b, type: 2}
