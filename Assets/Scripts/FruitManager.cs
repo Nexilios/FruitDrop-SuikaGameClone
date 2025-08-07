@@ -72,7 +72,7 @@ public class FruitManager : MonoBehaviour
         }
     }
     
-    public FruitData GetNextFruitData()
+    private FruitData GetNextFruitDataFromQueue()
     {
         if (nextFruitList.Count <= 0 || weightedFruits.Count <= 0) return null;
         
@@ -82,21 +82,49 @@ public class FruitManager : MonoBehaviour
         return nextFruitData;
     }
 
-    public GameObject InstantiateFruit(Transform parent, Vector3 pos = default)
+    private FruitData GetUpgradeFruitData(FruitData.FruitNames upgradeFruitName)
     {
-        FruitData newFruitData = GetNextFruitData();
+        var newFruitData = weightedFruits[currentGameStage].fruits.FirstOrDefault(wf => wf.fruitData.fruitName == upgradeFruitName)?.fruitData;
         
-        var newFruit = pos.Equals(Vector3.zero) ? Instantiate(fruitPrefab, parent) : Instantiate(fruitPrefab, pos, Quaternion.identity, parent);
+        return newFruitData ? newFruitData : null;
+    }
+
+    private FruitData GetFruitData(bool isMergeSpawn, FruitData.FruitNames fruitName)
+    {
+        return isMergeSpawn ? GetUpgradeFruitData(fruitName): GetNextFruitDataFromQueue();
+    }
+    
+    public GameObject InstantiateFruit(Transform parent, Vector3? pos = null, bool isMergeSpawn = false, FruitData.FruitNames mergingFruitName = default)
+    {
+        var newFruitData = GetFruitData(isMergeSpawn, mergingFruitName);
+        
+        var spawnPos = pos ?? parent.position;
+        
+        var newFruit = pos.Equals(Vector3.zero) ? Instantiate(fruitPrefab, parent) : Instantiate(fruitPrefab, spawnPos, Quaternion.identity, parent);
         
         newFruit.GetComponent<FruitScript>().SetFruitData(newFruitData);
 
         return newFruit;
     }
+
+    private void AddScore()
+    {
+        // Implement Adding Score
+    }
     
     public void MergeFruit(GameObject fruit1, GameObject fruit2)
     {
-        Vector3 newPoint = Vector3.Lerp(fruit1.transform.position, fruit2.transform.position, 0.6f);
-        InstantiateFruit(fruitFolder.transform, newPoint);
+        var newPoint = Vector3.Lerp(fruit1.transform.position, fruit2.transform.position, 0.6f);
+        
+        var upgradedFruitName = fruit1.GetComponent<FruitScript>().GetFruitData().nextFruitTierName;
+        if (upgradedFruitName != FruitData.FruitNames.Watermelon)
+        {
+            InstantiateFruit(fruitFolder.transform, newPoint, true, upgradedFruitName);
+        }
+        else
+        {
+            AddScore();
+        } 
         
         Destroy(fruit1, 0.01f);
         Destroy(fruit2, 0.01f);

@@ -24,7 +24,7 @@ public class FruitData : ScriptableObject
     [Header("Gameplay Property")]
     public float mergeScoreReward;
     public FruitNames fruitName;
-    public FruitNames nextFruitTier;
+    public FruitNames nextFruitTierName;
 
     [Header("CircleCollider2D Property")]
     public Vector2 colliderOffset;
