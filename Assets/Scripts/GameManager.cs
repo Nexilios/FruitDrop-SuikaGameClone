@@ -1,17 +1,51 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+    public TextMeshProUGUI scoreText;
+    
+    [Header("Debugging")]
+    [SerializeField] private int currentScore;
+    [SerializeField] private int highScore;
+
+    private void Awake()
     {
-        // Hide Mouse Pointer
-        //Cursor.visible = false;
+        if (instance == null) instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        // Hide Mouse Pointer
+        Cursor.visible = false;
         
+        highScore = PlayerPrefs.GetInt("high_score", 0);
+        
+        if (scoreText) scoreText.text = "SCORE: " + currentScore;
+    }
+
+    private void UpdateScoreText(int score)
+    {
+        if (scoreText)
+        {
+            scoreText.text = "SCORE: " + score;
+        }
+    }
+
+    public void AddScore(int scoreToAdd)
+    {
+        currentScore += scoreToAdd;
+        UpdateScoreText(currentScore);
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
+    public int GetHighScore()
+    {
+        return highScore;
     }
 }

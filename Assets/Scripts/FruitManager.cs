@@ -26,6 +26,7 @@ public class FruitManager : MonoBehaviour
     {
         InitializeFruitList();
     }
+    
     private int? GetRandomFruitIndex(WeightedFruitsData array)
     {
         float totalWeight = array.fruits.Sum(fruit => fruit.weight);
@@ -106,25 +107,22 @@ public class FruitManager : MonoBehaviour
 
         return newFruit;
     }
-
-    private void AddScore()
-    {
-        // Implement Adding Score
-    }
     
     public void MergeFruit(GameObject fruit1, GameObject fruit2)
     {
         var newPoint = Vector3.Lerp(fruit1.transform.position, fruit2.transform.position, 0.6f);
+        var fruit1Script = fruit1.GetComponent<FruitScript>();
         
-        var upgradedFruitName = fruit1.GetComponent<FruitScript>().GetFruitData().nextFruitTierName;
+        var upgradedFruitName = fruit1Script.GetFruitData().nextFruitTierName;
         if (upgradedFruitName != FruitData.FruitNames.Watermelon)
         {
             InstantiateFruit(fruitFolder.transform, newPoint, true, upgradedFruitName);
         }
-        else
+
+        if (GameManager.instance)
         {
-            AddScore();
-        } 
+            GameManager.instance.AddScore(fruit1Script.GetFruitData().mergeScoreReward);
+        }
         
         Destroy(fruit1, 0.01f);
         Destroy(fruit2, 0.01f);
