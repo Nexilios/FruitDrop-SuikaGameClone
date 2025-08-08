@@ -22,7 +22,7 @@ public class FruitData : ScriptableObject
     public Sprite sprite;
     
     [Header("Gameplay Property")]
-    public float mergeScoreReward;
+    public int mergeScoreReward;
     public FruitNames fruitName;
     public FruitNames nextFruitTierName;
 
