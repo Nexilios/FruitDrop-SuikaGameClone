@@ -33,10 +33,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddScore(int scoreToAdd)
+    public int AddScore(int scoreToAdd)
     {
         currentScore += scoreToAdd;
         UpdateScoreText(currentScore);
+
+        return currentScore;
     }
 
     public int GetCurrentScore()

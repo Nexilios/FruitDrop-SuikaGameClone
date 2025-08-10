@@ -10,6 +10,8 @@ public class FruitManager : MonoBehaviour
     public GameObject fruitPrefab;
     public GameObject fruitFolder;
     
+    private int _maxGameStage;
+    
     [SerializeField] private List<WeightedFruitsData> weightedFruits;
     [SerializeField] private int currentGameStage;
     
@@ -25,11 +27,13 @@ public class FruitManager : MonoBehaviour
     private void Start()
     {
         InitializeFruitList();
+
+        _maxGameStage = weightedFruits.Count - 1;
     }
     
     private int? GetRandomFruitIndex(WeightedFruitsData array)
     {
-        float totalWeight = array.fruits.Sum(fruit => fruit.weight);
+        float totalWeight = array.totalWeight;
         
         float randomValue = Random.Range(0f, totalWeight);
         float currentWeight = 0f;
@@ -121,7 +125,11 @@ public class FruitManager : MonoBehaviour
 
         if (GameManager.instance)
         {
-            GameManager.instance.AddScore(fruit1Script.GetFruitData().mergeScoreReward);
+            int currScore = GameManager.instance.AddScore(fruit1Script.GetFruitData().mergeScoreReward);
+            if (currScore >= weightedFruits[currentGameStage].upgradeScoreRequirement && currentGameStage < _maxGameStage)
+            {
+                currentGameStage += System.Math.Clamp(currentGameStage, 0, _maxGameStage);
+            }
         }
         
         Destroy(fruit1, 0.01f);
