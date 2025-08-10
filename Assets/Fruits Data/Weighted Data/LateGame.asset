@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruits:
   - fruitData: {fileID: 11400000, guid: 369b33d62aa3e0645a7c2fc2a676a045, type: 2}
-    weight: 25
-  - fruitData: {fileID: 11400000, guid: 3ea76e421b15d2f42912455a1fafb8ad, type: 2}
-    weight: 25
-  - fruitData: {fileID: 11400000, guid: a9472f11d755afc4ebf856257b6ae922, type: 2}
     weight: 20
+  - fruitData: {fileID: 11400000, guid: 3ea76e421b15d2f42912455a1fafb8ad, type: 2}
+    weight: 30
+  - fruitData: {fileID: 11400000, guid: a9472f11d755afc4ebf856257b6ae922, type: 2}
+    weight: 25
   - fruitData: {fileID: 11400000, guid: 0314d8de2a661804b899a0aae592507b, type: 2}
-    weight: 15
+    weight: 10
   - fruitData: {fileID: 11400000, guid: 7e3b03c929f09814fa94d9c69f807425, type: 2}
     weight: 9
   - fruitData: {fileID: 11400000, guid: 2379f504568c5af488a319852c5b242d, type: 2}
@@ -33,3 +33,5 @@ MonoBehaviour:
     weight: 0
   - fruitData: {fileID: 11400000, guid: 20aa4f3fcb953ea43bd43229bee2a2c5, type: 2}
     weight: 0
+  totalWeight: 100
+  upgradeScoreRequirement: -1

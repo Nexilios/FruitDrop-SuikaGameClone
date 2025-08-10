@@ -33,3 +33,4 @@ MonoBehaviour:
     weight: 0
   - fruitData: {fileID: 11400000, guid: 20aa4f3fcb953ea43bd43229bee2a2c5, type: 2}
     weight: 0
+  upgradeScoreRequirement: 5000
